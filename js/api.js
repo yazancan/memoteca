@@ -20,7 +20,8 @@ const api = {
         body: JSON.stringify(pensamento)
       });
       return await response.json();
-    } catch {
+    } 
+    catch {
       alert("Erro ao buscar pensamentos");
       throw error;
     }

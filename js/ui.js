@@ -6,7 +6,7 @@ const ui = {
 
     try {
       const pensamentos = await api.buscarPensamentos();
-      pensamentos.foreach(ui.adicionarPensamentoNaLista);
+      pensamentos.forEach(ui.adicionarPensamentoNaLista);
     } catch {
       alert("Erro ao renderizar pensamentos");
     }
