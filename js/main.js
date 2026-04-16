@@ -5,7 +5,10 @@ document.addEventListener("DOMContentLoaded", () => {
   ui.renderizarPensamentos();
 
   const formularioPensamento = document.getElementById("pensamento-form");
+  const botaoCancelar = document.getElementById("botao-cancelar");
+
   formularioPensamento.addEventListener("submit", manipularSubmissaoForumlario);
+  botaoCancelar.addEventListener("click", manipularCancelamento);
 });
 
 async function manipularSubmissaoForumlario(event) {
@@ -15,9 +18,17 @@ async function manipularSubmissaoForumlario(event) {
   const autoria = document.getElementById("pensamento-autoria").value;
 
   try {
-    await api.salvarPensamento({ conteudo, autoria });
+    if(id) {
+      await api.editarPensamento({ id, conteudo, autoria });
+    } else {
+      await api.salvarPensamento({ conteudo, autoria });
+    }
     ui.renderizarPensamentos();
   } catch {
     alert("Erro ao salvar pensamento");
   }
+}
+
+function manipularCancelamento() {
+  ui.limparFormulario();
 }
